@@ -10,8 +10,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio_ext.h>
 #include "matematicas.h"
-#define CLEAR_SCREEN system("cls")
+#define CLEAR_SCREEN system("clear")
 
 int main(void) {
 	int optionSelected;
@@ -21,6 +22,9 @@ int main(void) {
 	int subtractionResult;
 	float divisionResult;
 	int multiplicationResult;
+	int factorialOne;
+	int factorialTwo;
+	int returnDivision;
 	do
 	{
 		CLEAR_SCREEN;
@@ -30,39 +34,42 @@ int main(void) {
 		printf("\n4) Informar resultados.");
 		printf("\n5) Salir.");
 		printf("\nIngrese su opcion: ");
+		__fpurge(stdin);
 		scanf("%d",&optionSelected);
 		switch(optionSelected)
 		{
 			case 1:
 				printf("Ingresar el 1er operando: ");
+				__fpurge(stdin);
 				scanf("%d",&numberOne);
 				break;
 			case 2:
 				printf("Ingresar el 2do operando: ");
+				__fpurge(stdin);
 				scanf("%d",&numberTwo);
 				break;
 			case 3:
-				sumResult=sumNumbers(numberOne,numberTwo);
-				subtractionResult=subtractionNumbers(numberOne,numberTwo);
-				multiplicationResult=multiplicationNumbers(numberOne,numberTwo);
-				if(numberTwo!=0)
-				{
-					divisionResult=divisionNumbers(numberOne,numberTwo);
-				}
+				sumNumbers(numberOne,numberTwo,&sumResult);
+				subtractionNumbers(numberOne,numberTwo,&subtractionResult);
+				multiplicationNumbers(numberOne,numberTwo,&multiplicationResult);
+				returnDivision=divisionNumbers(numberOne,numberTwo,&divisionResult);
+				factorialNumbers(numberOne,numberTwo,&factorialOne,&factorialTwo);
 				break;
 			case 4:
 				CLEAR_SCREEN;
-				printf("\na) El resultado de %d + %d es: %d",numberOne,numberTwo,sumResult);
-				printf("\nb) El resultado de %d - %d es: %d",numberOne,numberTwo,subtractionResult);
-				if(numberTwo!=0)
+				printf("\nEl resultado de %d+%d es: %d",numberOne,numberTwo,sumResult);
+				printf("\nEl resultado de %d-%d es: %d",numberOne,numberTwo,subtractionResult);
+				if(returnDivision==0)
 				{
-					printf("\nc) El resultado de %d / %d es: %f",numberOne,numberTwo,divisionResult);
+					printf("\nEl resultado de %d/%d es: %.2f",numberOne,numberTwo,divisionResult);
 				}
 				else
 				{
-					printf("\nc) No se puede dividir entre 0");
+					printf("\nNo es posible dividir por cero");
 				}
-				printf("\nd) El resultado de %d * %d es: %d",numberOne,numberTwo,multiplicationResult);
+				printf("\nEl resultado de %d*%d es: %d",numberOne,numberTwo,multiplicationResult);
+				printf("\nEl factorial de %d es: %d y El factorial de %d es %d"
+						,numberOne,factorialOne,numberTwo,factorialTwo);
 				printf("\nPresione una tecla para continuar...");
 				getchar();
 				getchar();
