@@ -63,12 +63,10 @@ int utn_multiplicationNumbers(float numberOne,float numberTwo, float* multiplica
  * utn_factorialNumber : calcula el factorial de un numero dado
  * int number: numero dado
  * int* factorial: direccion de memoria para guardar el factorial
- * retunrFunction: devuelve 0 si no hubo error, devuelve -1 si el numero dado es negativo, devuelve -2 si el numero es decimal,
- *  devuelve -3 si el numero dado es muy grande para calular el factorial
+ * retunrFunction: devuelve 0 si no hubo error, devuelve -1 si el numero dado es negativo (no existe factorial de negativos)
  * */
-int utn_factorialNumber(float number, long long int* factorial)
+int utn_factorialNumber(float number, unsigned long long int* factorial)
 {
-	#define MAX_FACTORIAL 20
 	int i;
 	unsigned long long int auxiliarFactorial = 1;
 	int returnFunction = 0;
@@ -76,18 +74,11 @@ int utn_factorialNumber(float number, long long int* factorial)
 	{
 		if(number > 0)
 		{
-			if(number > MAX_FACTORIAL)
+			for(i = 0;i < number - 1;i++)
 			{
-				returnFunction=-3;
+				auxiliarFactorial = auxiliarFactorial * (number - i);
 			}
-			else
-			{
-				for(i = 0;i < number - 1;i++)
-				{
-					auxiliarFactorial = auxiliarFactorial * (number - i);
-				}
-				*factorial = auxiliarFactorial;
-			}
+			*factorial = auxiliarFactorial;
 		}
 		else if(number == 0)
 		{

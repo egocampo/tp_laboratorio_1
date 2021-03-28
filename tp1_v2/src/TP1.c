@@ -80,11 +80,6 @@ int main(void) {
 					printf("\nEl número %.2f es negativo, no tiene factorial"
 							,numberOne);
 				}
-				else if(returnFactorialOne==-3)
-				{
-					printf("El número %.2f es demasiado grande para calcular el factorial aquí"
-																	,numberOne);
-				}
 				else
 				{
 					printf("El número %.2f es flotante, no tiene factorial"
@@ -99,11 +94,6 @@ int main(void) {
 				{
 					printf(" y El número %.2f es negativo, no tiene factorial"
 							,numberTwo);
-				}
-				else if(returnFactorialTwo==-3)
-				{
-					printf("El número %.2f es demasiado grande para calcular el factorial aquí"
-																	,numberTwo);
 				}
 				else
 				{
