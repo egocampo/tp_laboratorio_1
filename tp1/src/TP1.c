@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdio_ext.h>
 #include "matematicas.h"
+#include "utn.h"
 #define CLEAR_SCREEN system("clear")
 
 int main(void) {
@@ -29,8 +30,8 @@ int main(void) {
 	do
 	{
 		CLEAR_SCREEN;
-		printf("1) Ingresar el 1er operando (A=%.2f).",numberOne);
-		printf("\n2) Ingresar el 2do operando (B=%.2f).",numberTwo);
+		printf("1) Ingresar el 1er operando (A=%.1f).",numberOne);
+		printf("\n2) Ingresar el 2do operando (B=%.1f).",numberTwo);
 		printf("\n3) Calcular todas las operaciones.");
 		printf("\n4) Informar resultados.");
 		printf("\n5) Salir.");
@@ -40,14 +41,10 @@ int main(void) {
 		switch(optionSelected)
 		{
 			case 1:
-				printf("Ingresar el 1er operando: ");
-				__fpurge(stdin);
-				scanf("%f",&numberOne);
+				utn_getFloatWithoutMinimumOrMaximum(&numberOne,"Ingresar el 1er operando: ","No es un número válido",3);
 				break;
 			case 2:
-				printf("Ingresar el 2do operando: ");
-				__fpurge(stdin);
-				scanf("%f",&numberTwo);
+				utn_getFloatWithoutMinimumOrMaximum(&numberTwo,"Ingresar el 2do operando: ","No es un número válido",3);
 				break;
 			case 3:
 				utn_sumNumbers(numberOne,numberTwo,&sumResult);
@@ -59,55 +56,55 @@ int main(void) {
 				break;
 			case 4:
 				CLEAR_SCREEN;
-				printf("\nEl resultado de %.2f + %.2f es: %.2f",numberOne,numberTwo,sumResult);
-				printf("\nEl resultado de %.2f - %.2f es: %.2f",numberOne,numberTwo,subtractionResult);
+				printf("\nEl resultado de %.1f + %.1f es: %.1f",numberOne,numberTwo,sumResult);
+				printf("\nEl resultado de %.1f - %.1f es: %.1f",numberOne,numberTwo,subtractionResult);
 				if(returnDivision==0)
 				{
-					printf("\nEl resultado de %.2f / %.2f es: %.2f",numberOne,numberTwo,divisionResult);
+					printf("\nEl resultado de %.1f / %.1f es: %.1f",numberOne,numberTwo,divisionResult);
 				}
 				else
 				{
 					printf("\nNo es posible dividir por cero");
 				}
-				printf("\nEl resultado de %.2f * %.2f es: %.2f\n",numberOne,numberTwo,multiplicationResult);
+				printf("\nEl resultado de %.1f * %.1f es: %.1f",numberOne,numberTwo,multiplicationResult);
 				if(returnFactorialOne==0)
 				{
-					printf("\nEl factorial de %.2f es: %lld"
+					printf("\nEl factorial de %.1f es: %lld"
 							,numberOne,factorialOne);
 				}
 				else if(returnFactorialOne==-1)
 				{
-					printf("\nEl número %.2f es negativo, no tiene factorial"
+					printf("\nEl número %.1f es negativo, no tiene factorial"
 							,numberOne);
 				}
 				else if(returnFactorialOne==-3)
 				{
-					printf("El número %.2f es demasiado grande para calcular el factorial aquí"
+					printf("\nEl número %.1f es demasiado grande para calcular el factorial aquí"
 																	,numberOne);
 				}
 				else
 				{
-					printf("El número %.2f es flotante, no tiene factorial"
+					printf("\nEl número %.1f es flotante, no tiene factorial"
 												,numberOne);
 				}
 				if(returnFactorialTwo==0)
 				{
-					printf(" y El factorial de %.2f es: %lld"
+					printf(" y El factorial de %.1f es: %lld"
 							,numberTwo,factorialTwo);
 				}
 				else if(returnFactorialTwo==-1)
 				{
-					printf(" y El número %.2f es negativo, no tiene factorial"
+					printf(" y El número %.1f es negativo, no tiene factorial"
 							,numberTwo);
 				}
 				else if(returnFactorialTwo==-3)
 				{
-					printf("El número %.2f es demasiado grande para calcular el factorial aquí"
+					printf(" y El número %.1f es demasiado grande para calcular el factorial aquí"
 																	,numberTwo);
 				}
 				else
 				{
-					printf(" y El número %.2f es flotante, no tiene factorial"
+					printf(" y El número %.1f es flotante, no tiene factorial"
 												,numberTwo);
 				}
 				printf("\nPresione una tecla para continuar...");
