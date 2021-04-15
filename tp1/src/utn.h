@@ -14,9 +14,14 @@
 #define UTN_OPCION_SI 's'
 #define UTN_OPCION_NO 'n'
 
-int utn_getInteger(int* pNumeroSolicitado,char* pTexto,char* pTextoError,int reintentos, int minimo, int maximo);
-int utn_getFloat(float* pNumeroSolicitado,char* pTexto,char* pTextoError,int reintentos, int minimo, int maximo);
-int utn_getChar(char* pCaracterSolicitado,char* pTexto,char* pTextoError,int reintentos, char opcionUno, char opcionDos);
+int utn_getNumber(int* pResult, char* pText, char* pTextError, int min, int max, int qtyRetry);
+int utn_getInt(int* pResult);
+int utn_validateNumber(char* pArray);
+int utn_myGets(char* string, int len);
+
+int utn_getFloatWithoutMinimumOrMaximum(float* pResult, char* pText, char* pTextError, int qtyRetry);
+int utn_getFloat(float* pResult);
+int utn_validateFloat(char* string);
 
 
 #endif /* UTN_H_ */

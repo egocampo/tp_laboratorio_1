@@ -1,23 +1,26 @@
 /*
  ============================================================================
- Name        : TP1.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ALUMNO: GABRIEL OCAMPO
+DIVISION: 1°H
+MATERIA: PROG / LABO 1
+TP_1 CALCULADORA
  ============================================================================
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdio_ext.h>
-#include "matematicas.h"
 #include "utn.h"
+#include "matematicas.h"
+#include "tp1Resources.h"
 #define CLEAR_SCREEN system("clear")
 
 int main(void) {
 	int optionSelected;
-	float numberOne=0;
-	float numberTwo=0;
+	float numberOne;
+	float numberTwo;
+	int flagNumberOne=-1;
+	int flagNumberTwo=-1;
+	int flagOption3=-2;
 	float sumResult;
 	float subtractionResult;
 	float divisionResult;
@@ -30,88 +33,25 @@ int main(void) {
 	do
 	{
 		CLEAR_SCREEN;
-		printf("1) Ingresar el 1er operando (A=%.1f).",numberOne);
-		printf("\n2) Ingresar el 2do operando (B=%.1f).",numberTwo);
-		printf("\n3) Calcular todas las operaciones.");
-		printf("\n4) Informar resultados.");
-		printf("\n5) Salir.");
-		printf("\nIngrese su opcion: ");
-		__fpurge(stdin);
-		scanf("%d",&optionSelected);
+		optionSelected=0;
+		tp1_showMenu(numberOne, numberTwo,flagNumberOne,flagNumberTwo);
+		utn_getNumber(&optionSelected,"\nIngrese su opcion: ","",1,5,0);
 		switch(optionSelected)
 		{
 			case 1:
-				utn_getFloatWithoutMinimumOrMaximum(&numberOne,"Ingresar el 1er operando: ","No es un número válido",3);
+				flagNumberOne = utn_getFloatWithoutMinimumOrMaximum(&numberOne,"Ingresar el 1er operando: ","",1);
 				break;
 			case 2:
-				utn_getFloatWithoutMinimumOrMaximum(&numberTwo,"Ingresar el 2do operando: ","No es un número válido",3);
+				flagNumberTwo = utn_getFloatWithoutMinimumOrMaximum(&numberTwo,"Ingresar el 2do operando: ","",1);
 				break;
 			case 3:
-				utn_sumNumbers(numberOne,numberTwo,&sumResult);
-				utn_subtractionNumbers(numberOne,numberTwo,&subtractionResult);
-				utn_multiplicationNumbers(numberOne,numberTwo,&multiplicationResult);
-				returnDivision=utn_divisionNumbers(numberOne,numberTwo,&divisionResult);
-				returnFactorialOne=utn_factorialNumber(numberOne,&factorialOne);
-				returnFactorialTwo=utn_factorialNumber(numberTwo,&factorialTwo);
+				flagOption3 = realizarCalculos(flagNumberOne,flagNumberTwo,numberOne,numberTwo,&sumResult,&subtractionResult,&multiplicationResult,&returnDivision,&divisionResult,&returnFactorialOne,&factorialOne,&returnFactorialTwo,&factorialTwo,&flagOption3);
 				break;
 			case 4:
-				CLEAR_SCREEN;
-				printf("\nEl resultado de %.1f + %.1f es: %.1f",numberOne,numberTwo,sumResult);
-				printf("\nEl resultado de %.1f - %.1f es: %.1f",numberOne,numberTwo,subtractionResult);
-				if(returnDivision==0)
-				{
-					printf("\nEl resultado de %.1f / %.1f es: %.1f",numberOne,numberTwo,divisionResult);
-				}
-				else
-				{
-					printf("\nNo es posible dividir por cero");
-				}
-				printf("\nEl resultado de %.1f * %.1f es: %.1f",numberOne,numberTwo,multiplicationResult);
-				if(returnFactorialOne==0)
-				{
-					printf("\nEl factorial de %.1f es: %lld"
-							,numberOne,factorialOne);
-				}
-				else if(returnFactorialOne==-1)
-				{
-					printf("\nEl número %.1f es negativo, no tiene factorial"
-							,numberOne);
-				}
-				else if(returnFactorialOne==-3)
-				{
-					printf("\nEl número %.1f es demasiado grande para calcular el factorial aquí"
-																	,numberOne);
-				}
-				else
-				{
-					printf("\nEl número %.1f es flotante, no tiene factorial"
-												,numberOne);
-				}
-				if(returnFactorialTwo==0)
-				{
-					printf(" y El factorial de %.1f es: %lld"
-							,numberTwo,factorialTwo);
-				}
-				else if(returnFactorialTwo==-1)
-				{
-					printf(" y El número %.1f es negativo, no tiene factorial"
-							,numberTwo);
-				}
-				else if(returnFactorialTwo==-3)
-				{
-					printf(" y El número %.1f es demasiado grande para calcular el factorial aquí"
-																	,numberTwo);
-				}
-				else
-				{
-					printf(" y El número %.1f es flotante, no tiene factorial"
-												,numberTwo);
-				}
-				printf("\nPresione una tecla para continuar...");
-				getchar();
-				getchar();
+				imprimirResultados(flagNumberOne,flagNumberTwo,flagOption3,numberOne,numberTwo,sumResult,subtractionResult,multiplicationResult,divisionResult,returnDivision,returnFactorialOne,factorialOne,returnFactorialTwo,factorialTwo);
 				break;
 		}
 	}while(optionSelected!=5);
+	printf("Gracias por su uso. Hasta la próxima.\n");
 	return EXIT_SUCCESS;
 }
